@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ItemList from './week-3/item-list';
+import ItemList from './item-list';
 
 const Page = () => {
   return (

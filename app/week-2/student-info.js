@@ -3,7 +3,7 @@ const StudentInfo = () => {
   return (
     <div>
       <p>Arshpreet Singh</p>
-      <Link href="https://github.com/Arshpreet77/cprg306-assignmnets">
+      <Link href="https://github.com/Arshpreet77">
         GitHub Repository
       </Link>
     </div>

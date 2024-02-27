@@ -11,8 +11,15 @@ export default function HomePage() {
       </div>
       <div className="flex justify-center items-center">
         <Link href="/week-3">Assignments week-3</Link>
+      </div>
+
+      <div className="flex justify-center items-center">
         <Link href="/week-4">Assignments week-4</Link>
       </div>
+
+      <div className="flex justify-center items-center">
+        <Link href="/week-5">Assignments week-5</Link>
+        </div>
     </main>
   );
 }

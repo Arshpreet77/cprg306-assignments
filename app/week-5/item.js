@@ -1,13 +1,16 @@
 "use client";
 import React from 'react';
+import ItemList from './item-list';
 
-const Item = ({ name, quantity, category }) => {
+
+const Page = () => {
     return (
-        <li className="flex justify-between items-center bg-gray-100 p-2 rounded shadow mb-2">
-            <span className="font-medium">{name}</span>
-            <span className="text-sm">{quantity}</span>
-            <span className="text-gray-600 italic">{category}</span>
-       </li>
+        <main className="bg-gray-100 p-4">
+            <h1 className="text-2xl font-bold text-center mb-4">List for Shopping</h1>
+            <div>className="</div>
+            <ItemList />
+        </main>
     );
 };
-export default Item;
+
+export default Page;

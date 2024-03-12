@@ -20,6 +20,14 @@ export default function HomePage() {
       <div className="flex justify-center items-center">
         <Link href="/week-5">Assignments week-5</Link>
         </div>
+
+      <div className="flex justify-center items-center">
+        <Link href="/week-6">Assignments week-6</Link>
+        </div>
+
+        <div className="flex justify-center items-center">
+        <Link href="/week-7">Assignments week-7</Link>
+        </div>
     </main>
   );
 }

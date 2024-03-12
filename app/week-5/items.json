@@ -1,6 +1,6 @@
 [
     {
-      "id": "1h2GJKH12gkHG31h1H",
+      "id": "1h2GJK12gkHG31h1H",
       "name": "milk, 4 L 🥛",
       "quantity": 1,
       "category": "dairy"
@@ -18,7 +18,7 @@
       "category": "dairy"
     },
     {
-      "id": "4k2J3K1H2GJKH12gk",
+      "id": "4k2J3K1H2GJK12gk",
       "name": "bananas 🍌",
       "quantity": 6,
       "category": "produce"
@@ -30,7 +30,7 @@
       "category": "produce"
     },
     {
-      "id": "6H1k2J3K1H2GJKH1",
+      "id": "6H1k2J3K1H2GJK1",
       "name": "chicken breasts, 1 kg 🍗",
       "quantity": 1,
       "category": "meat"
@@ -60,13 +60,13 @@
       "category": "household"
     },
     {
-      "id": "11k2J3K1H2GJKH12",
+      "id": "11k2J3K1H2GJK12",
       "name": "dish soap 🍽️",
       "quantity": 1,
       "category": "household"
     },
     {
-      "id": "12GJKH12gkHG31h1",
+      "id": "12GJK12gkHG31h1",
       "name": "hand soap 🧼",
       "quantity": 4,
       "category": "household"

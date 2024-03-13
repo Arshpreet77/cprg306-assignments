@@ -1,13 +1,20 @@
-import React from 'react';
+import React from "react";
 
-const ShoppingListItem = ({ name, quantity, category }) => {
-    return (
-        <li className="flex justify-between items-center bg-blue-500 text-white p-2 rounded shadow mb-2">
-            <span className="font-medium">{name}</span>
-            <span className="text-sm">{quantity}</span>
-            <span className="text-gray-600 italic">{category}</span>
-       </li>
-    );
-};
+function Item({ name, quantity, category, onSelect }) {
+  const handleClick = () => {
+    onSelect({ name, quantity, category });
+  };
 
-export default ShoppingListItem;
+  return (
+    <div onClick={handleClick}>
+      <li className="p-2 m-4 bg-slate-900 hover:bg-orange-800 cursor-pointer max-w-sm">
+        <h2 className="text-xl text-white font-bold">{name}</h2>
+        <div className="text-sm text-white">
+          Purchase {quantity} in {category}
+        </div>
+      </li>
+    </div>
+  );
+}
+
+export default Item;

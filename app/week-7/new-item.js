@@ -1,83 +1,79 @@
-import { useState } from "react";
+"use client";
+import React, { useState } from "react";
 
-export default function NewShoppingItem({ onAddItem }) {
-    const [itemName, setItemName] = useState("");
-    const [itemQuantity, setItemQuantity] = useState(1);
-    const [itemCategory, setItemCategory] = useState("produce");
+const NewItem = ({ onAddItem }) => {
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [category, setCategory] = useState("produce");
 
-    const categories = [
-        { label: 'Produce', value: 'produce' },
-        { label: 'Dairy', value: 'dairy' },
-        { label: 'Bakery', value: 'bakery' },
-        { label: 'Meat', value: 'meat' },
-        { label: 'Frozen Foods', value: 'frozen foods' },
-        { label: 'Canned Goods', value: 'canned goods' },
-        { label: 'Dry Goods', value: 'dry goods' },
-        { label: 'Beverages', value: 'beverages' },
-        { label: 'Snacks', value: 'snacks' },
-        { label: 'Household', value: 'household' },
-        { label: 'Others', value: 'others' },
-    ];
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-
-        const newItem = {
-            name: itemName,
-            quantity: parseInt(itemQuantity, 10),
-            category: itemCategory,
-        };
-
-        onAddItem(newItem);
-
-        setItemName('');
-        setItemQuantity(1);
-        setItemCategory('produce');
+    const item = {
+      name,
+      quantity,
+      category,
     };
 
-    return (
-        <main className="flex justify-center w-full">
-            <form onSubmit={handleFormSubmit} className="p-2 m-4 bg-slate-900 text-black max-w-sm w-full">
-                <div className="mb-2">
-                    <input
-                        type="text"
-                        required
-                        placeholder="Item name"
-                        onChange={(e) => setItemName(e.target.value)}
-                        value={itemName}
-                        className="w-full mt-1 border-2 text-black border-gray-300 p-2 rounded-lg font-sans"
-                    />
-                </div>
-                <div className="flex justify-between">
-                    <input
-                        type="number"
-                        required
-                        min="1"
-                        max="99"
-                        value={itemQuantity}
-                        onChange={(e) => setItemQuantity(e.target.value)}
-                        className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
-                    />
-                    <select
-                        required
-                        value={itemCategory}
-                        onChange={(e) => setItemCategory(e.target.value)}
-                        className="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
-                    >
-                        {categories.map((option) => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <button
-                    type="submit"
-                    className="w-full mt-4 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-                >
-                    Add new item
-                </button>
-            </form>
-        </main>
-    );
-}
+    onAddItem(item);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="text-black">
+        <div className="mb-2">
+          <input
+            placeholder="Item name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+          />
+        </div>
+        <div className="flex justify-between">
+          <div className="w-1/2 ">
+            <input
+              type="number"
+              min="1"
+              max="99"
+              value={quantity}
+              onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
+              required
+              className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+            />
+          </div>
+          <div className="flex justify-between">
+            <select
+              className="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="produce">Produce</option>
+              <option value="dairy">Dairy</option>
+              <option value="Bakery">Bakery</option>
+              <option value="Meat">Meat</option>
+              <option value="Frozen Foods">Frozen Foods</option>
+              <option value="Canned Goods">Canned Goods</option>
+              <option value="Dry Goods">Dry Goods</option>
+              <option value="Beverages">Beverages</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Household">Household</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full mt-4 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+        >
+          +
+        </button>
+      </div>
+     
+    </form>
+  );
+};
+
+export default NewItem;

@@ -21,7 +21,7 @@ const Page = () => {
         const cleanedItemName = itemName.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]| [ - ]| [ - ]|[\u2011-\u26FF]| [ - ])/g, '');
         setSelectedItemName(cleanedItemName);
     };
-
+    
     return (
         <main className="bg-gray-100 p-4">
             <h1 className="text-2xl font-bold text-black text-center mb-4">Shopping List</h1>

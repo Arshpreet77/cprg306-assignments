@@ -4,7 +4,7 @@ function Item({ name, quantity, category, onSelect }) {
   const handleClick = () => {
     onSelect({ name, quantity, category });
   };
-
+  
   return (
     <div onClick={handleClick}>
       <li className="p-2 m-4 bg-slate-900 hover:bg-orange-800 cursor-pointer max-w-sm">

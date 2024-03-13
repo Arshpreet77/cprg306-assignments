@@ -1,51 +1,56 @@
-
 "use client";
-import React, { useState } from 'react';
-import ShoppingItem from './shopping-item';
+import Item from "./item";
+import React, { useState } from "react";
 
-function ShoppingList({ items }) {
-  const [sortBy, setSortBy] = useState('name');
+const ItemList = ({ items, onItemSelect }) => {
+  const [sortBy, setSortBy] = useState("name");
 
-  const sortedItems = items.slice().sort((a, b) => {
-    if (sortBy === 'name') {
-      return a.name.localeCompare(b.name);
-    } else if (sortBy === 'category') {
-      return a.category.localeCompare(b.category);
-    }
-    return 0;
-  });
-
-  const renderSortButtons = () => (
-    <div>
-      <button
-        onClick={() => setSortBy('name')}
-        style={{ backgroundColor: sortBy === 'name' ? 'blue' : 'lightblue' }}
-      >
-        Sort by Name
-      </button>
-      <button
-        onClick={() => setSortBy('category')}
-        style={{ backgroundColor: sortBy === 'category' ? 'blue' : 'lightblue' }}
-      >
-        Sort by Category
-      </button>
-    </div>
-  );
-
-  const renderItems = () => (
-    sortedItems.map(item => (
-      <ShoppingItem key={item.id} name={item.name} quantity={item.quantity} category={item.category} />
-    ))
-  );
+  const sortedItems = items
+    .map((item) => item)
+    .sort((a, b) => {
+      if (sortBy === "name") {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === "category") {
+        return a.category.localeCompare(b.category);
+      }
+      return 0;
+    });
 
   return (
-    <div>
-      {renderSortButtons()}
+    <div className="mt-8 text-white">
+      <div>
+        <label htmlFor="sort">Sort by: </label>
+        <button
+          onClick={() => setSortBy("name")}
+          className={`p-1 m-2 w-28 ${
+            sortBy === "name" ? "bg-orange-400" : "bg-orange-500"
+          }`}
+        >
+          Name
+        </button>
+        <button
+          onClick={() => setSortBy("category")}
+          className={`p-1 m-2 w-28 ${
+            sortBy === "category" ? "bg-orange-400" : "bg-orange-500"
+          }`}
+        >
+          Category
+        </button>
+      </div>
+
       <ul>
-        {renderItems()}
+        {sortedItems.map((item) => (
+          <Item
+            key={item.id}
+            name={item.name}
+            quantity={item.quantity}
+            category={item.category}
+            onSelect={() => onItemSelect(item.name)}
+          />
+        ))}
       </ul>
     </div>
   );
-}
+};
 
-export default ShoppingList;
+export default ItemList;

@@ -28,6 +28,10 @@ export default function HomePage() {
         <div className="flex justify-center items-center">
         <Link href="/week-7">Assignments week-7</Link>
         </div>
+
+        <div className="flex justify-center items-center">
+        <Link href="/week-8">Assignments week-8</Link>
+        </div>
     </main>
   );
 }

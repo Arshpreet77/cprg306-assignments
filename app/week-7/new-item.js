@@ -17,7 +17,6 @@ const NewItem = ({ onAddItem }) => {
 
     onAddItem(item);
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="text-black">

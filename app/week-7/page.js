@@ -1,47 +1,37 @@
-"use client";
-import React, { useState } from 'react';
-import NewItem from './new-item';
-import ItemList from './item-list';
-import MealIdeas from './meal-ideas';
-import itemsData from './items.json';
+"use client"
+import { useState,useEffect } from 'react';
+
+import ItemList from './item-list'
+import NewItem from './new-item'
+import ItemsData from './items.json';
+import MealIdea from './meal-idea';
 
 
-const Page = () => {
-    const [items, setItems] = useState(itemsData);
-    const [selectedItemName, setSelectedItemName] = useState('');
 
-    const handleAddItem = (newItem) => {
-        const newId = Date.now().toString();
-        const itemWithId = { ...newItem, id: newId };
-        setItems(prevItems => [...prevItems, itemWithId]);
-    };
 
-    const handleItemSelect = (item) => {
-        const itemName = item.name.split(',')[0].trim();
-        const cleanedItemName = itemName.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]| [ - ]| [ - ]|[\u2011-\u26FF]| [ - ])/g, '');
-        setSelectedItemName(cleanedItemName);
-    };
+export default function Page() {
+	const [itemList, setItemList] = useState(ItemsData);
+	const [selectedItemName, setselectedItemName] = useState(null)
+	
+	function handleAddItem(newItem) {
+		setItemList([...itemList, newItem]);
 
-    const handleItemSelect = (item) => {
-        const itemName = item.name.split(',')[0].trim();
-        const cleanedItemName = itemName.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]| [ - ]| [ - ]|[\u2011-\u26FF]| [ - ])/g, '');
-        setSelectedItemName(cleanedItemName);
-    };
-    
-    return (
-        <main className="bg-gray-100 p-4">
-            <h1 className="text-2xl font-bold text-black text-center mb-4">Shopping List</h1>
-            <div className="flex">
-                <div className="w-1/2">
-                    <NewItem onAddItem={handleAddItem} />
-                    <ItemList items={items} onItemSelect={handleItemSelect} />
-                </div>
-                <div className="w-1/2">
-                    <MealIdeas ingredient={selectedItemName} />
-                </div>
-            </div>
-        </main>
-    );
-};
+	}
+	function handleItemSelect(item) {
+		
+		const cleanedName = item.name.replace(/(,.*|🍛|🥛|🍞|🥚|🍌|🥦|🍗|🍝|🧻|🍽️|🧼)/g, '').trim();
+		setselectedItemName(cleanedName);
+	}
+	return (
+		<main className="min-h-screen flex-col items-center justify-between p-24">
+			<h1 className="text-4xl font-semibold mb-6 border-b-2 border-gray-500">My Shopping List</h1>
+			<NewItem onAddItem={e => handleAddItem(e)}></NewItem>
 
-export default Page;
+			<ItemList items={itemList} onItemSelect={(item) => handleItemSelect(item)} />
+			<div className="md:w-1/2 p-4">										
+				<MealIdea ingredient= {selectedItemName}/>		      
+		 </div>	
+		</main>
+	)
+}
+

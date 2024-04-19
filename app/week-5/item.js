@@ -1,16 +1,15 @@
-"use client";
+// Item.js
+
 import React from 'react';
-import ItemList from './item-list';
 
-
-const Page = () => {
-    return (
-        <main className="bg-gray-100 p-4">
-            <h1 className="text-2xl font-bold text-center mb-4">List for Shopping</h1>
-            <div>className="</div>
-            <ItemList />
-        </main>
-    );
+const Item = ({name, quantity, category}) => {
+  return (
+    <ul className='border-2 p-2 m-4 bg-yellow-200 text-black'>
+        <li className='text-4xl font-bold'  >Name: {name}</li>
+        <li className='text-sm ' >Buy {quantity} in {category}</li>
+{/* {console.log("Hello World")} */}
+    </ul>
+  );
 };
 
-export default Page;
+export default Item;

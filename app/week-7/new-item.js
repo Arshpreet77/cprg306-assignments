@@ -1,78 +1,44 @@
-"use client";
-import React, { useState } from "react";
+'use client'
 
-const NewItem = ({ onAddItem }) => {
-  const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const [category, setCategory] = useState("produce");
+import { useState } from 'react';
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+export default function NewItem ({ onAddItem }) {
+    const [name, setName] = useState("");
+    const [quantity, setQuantity] = useState(1);
+    const [category, setCategory] = useState("produce");
 
-    const item = {
-      name,
-      quantity,
-      category,
-    };
+    function handleSubmit (event) {
+        event.preventDefault();
 
-    onAddItem(item);
-  };
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="text-black">
-        <div className="mb-2">
-          <input
-            placeholder="Item name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="w-full mt-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
-          />
-        </div>
-        <div className="flex justify-between">
-          <div className="w-1/2 ">
-            <input
-              type="number"
-              min="1"
-              max="99"
-              value={quantity}
-              onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
-              required
-              className="w-20 ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
-            />
-          </div>
-          <div className="flex justify-between">
-            <select
-              className="ml-1 border-2 border-gray-300 p-2 rounded-lg font-sans"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="produce">Produce</option>
-              <option value="dairy">Dairy</option>
-              <option value="Bakery">Bakery</option>
-              <option value="Meat">Meat</option>
-              <option value="Frozen Foods">Frozen Foods</option>
-              <option value="Canned Goods">Canned Goods</option>
-              <option value="Dry Goods">Dry Goods</option>
-              <option value="Beverages">Beverages</option>
-              <option value="Snacks">Snacks</option>
-              <option value="Household">Household</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
+        onAddItem({ name, quantity, category });
 
-        <button
-          type="submit"
-          className="w-full mt-4 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-        >
-          +
-        </button>
-      </div>
-     
-    </form>
-  );
-};
+        setName("");
+        setQuantity(1);
+        setCategory("produce");
+    }
 
-export default NewItem;
+    return (
+        <form className="p-4 m-3 text-black bg-blue-100 max-w-sm w-full rounded-md">
+            <label>Name: </label>
+            <input className="p-4 mb-3 rounded-md w-full" type="text" value={name} onChange={e => setName(e.target.value)} required/><br/>
+            <label>Quantity: </label>
+            <input className="p-4 mb-3 rounded-md w-full" type="number" value={quantity} min="1" max="99" onChange={e => setQuantity(parseInt(e.target.value))} required/><br/>
+            <label>Category: </label>
+            <select className="p-4 mb-3 rounded-md w-full" value={category} onChange={e => setCategory(e.target.value)}>
+                <option value="produce">Produce</option>
+                <option value="dairy">Dairy</option>
+                <option value="bakery">Bakery</option>
+                <option value="meat">Meat</option>
+                <option value="frozen foods">Frozen Foods</option>
+                <option value="canned goods">Canned Goods</option>
+                <option value="dry goods">Dry goods</option>
+                <option value="beverages">Beverages</option>
+                <option value="snacks">Snacks</option>
+                <option value="household">Household</option>
+                <option value="other">Other</option>
+            </select><br/>
+
+            <button type="submit" onClick={e => handleSubmit(e)} className="bg-green-500 w-full p-1.5 rounded-lg mb-2 text-white">Submit</button>
+        </form>
+    )
+}

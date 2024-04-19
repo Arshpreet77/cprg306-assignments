@@ -1,20 +1,9 @@
-import React from "react";
-
-function Item({ name, quantity, category, onSelect }) {
-  const handleClick = () => {
-    onSelect({ name, quantity, category });
-  };
-
+export default function Item ({item, onSelect}) {
   return (
-    <div onClick={handleClick}>
-      <li className="p-2 m-4 bg-slate-900 hover:bg-orange-800 cursor-pointer max-w-sm">
-        <h2 className="text-xl text-white font-bold">{name}</h2>
-        <div className="text-sm text-white">
-          Purchase {quantity} in {category}
-        </div>
-      </li>
-    </div>
-  );
+    <ul className='border border-2 p-2 m-4 bg-yellow-200 text-black' onClick={()=>onSelect(item)}>
+      <li className='text-4xl font-bold'>{item.name}</li>
+      <li className='text-sm ' >Category: {item.category}</li>
+      <li className='text-sm ' >Quantity: {item.quantity}</li>
+    </ul>
+  )
 }
-
-export default Item;

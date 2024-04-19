@@ -1,53 +1,52 @@
-"use client";
-import React, { useState } from 'react';
-import Item from './item';
-import itemsData from './items.json';
+'use client';
 
-function ItemList() {
-  const [sortingCriteria, setSortingCriteria] = useState('name');
+import React , {useState} from "react";
+import jsonItem from "./items.json";
+import Item from "./item";
 
-  const sortedItems = [...itemsData].sort((a, b) => {
-    if (sortingCriteria === 'name') {
-      return a.name.localeCompare(b.name);
-    } else if (sortingCriteria === 'category') {
-      return a.category.localeCompare(b.category);
-    }
-    return 0;
-  });
+const ItemList = ()=>{
+    // console.log(jsonItem)
+const [sortBy, setSortBy] = useState("name")
 
-  const displaySortingButtons = () => {
-    return (
-      <div>
-        <button
-          onClick={() => setSortingCriteria('name')}
-          style={{ backgroundColor: sortingCriteria === 'name' ? 'lightblue' : 'white' }}
-        >
-          Arrange by Name
-        </button>
-        <button
-          onClick={() => setSortingCriteria('category')}
-          style={{ backgroundColor: sortingCriteria === 'category' ? 'lightblue' : 'white' }}
-        >
-          Arrange by Category
-        </button>
-      </div>
-    );
-  };
+const sortedItems = [...jsonItem].sort((a,b)=>{
+if (sortBy==="name"){
+    return a.name.localeCompare(b.name);
+}
+else if(sortBy==="category"){
+    return a.category.localeCompare(b.category);
 
-  const displayItems = () => {
-    return sortedItems.map(item => (
-      <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category} />
-    ));
-  };
+}
+return 0;
+});
+ 
+    
+    
 
-  return (
+return (
     <div>
-      {displaySortingButtons()}
-      <ul>
-        {displayItems()}
-      </ul>
+        <main>
+            <span className="mr-4">Sort By</span>
+            <button
+             onClick={()=> {setSortBy("name")}}
+             className={`border border-yellow-100  px-4 py-2 mr-4 ${sortBy === "name" ? "bg-purple-400 text-white" : ""}`}
+             > Name</button>
+
+
+            <button onClick={()=> {setSortBy("category")}}
+             className={`border border-yellow-100 px-4 py-2 mr-4 ${sortBy === "category" ? "bg-purple-400 text-white" : ""}`} 
+             
+            
+            > Category</button>
+
+
+        </main>
+    <ul className="inline">
+      {sortedItems.map((item, index) => (
+        <Item key={index} {...item} />
+      ))}
+    </ul>
     </div>
   );
-}
+      }
 
 export default ItemList;

@@ -1,56 +1,44 @@
 "use client";
+
+import React, {useState, useEffect} from "react";
 import Item from "./item";
-import React, { useState } from "react";
+// import items from "./items.json";
 
-const ItemList = ({ items, onItemSelect }) => {
-  const [sortBy, setSortBy] = useState("name");
+const ItemList = ({items = []}) => {
 
-  const sortedItems = items
-    .map((item) => item)
-    .sort((a, b) => {
-      if (sortBy === "name") {
-        return a.name.localeCompare(b.name);
-      } else if (sortBy === "category") {
-        return a.category.localeCompare(b.category);
-      }
-      return 0;
-    });
+  const [sortBy , setSortBy] = useState("name");
+  const [sortedItems, setSortedItems] = useState([]);
 
-  return (
-    <div className="mt-8 text-white">
-      <div>
-        <label htmlFor="sort">Sort by: </label>
-        <button
-          onClick={() => setSortBy("name")}
-          className={`p-1 m-2 w-28 ${
-            sortBy === "name" ? "bg-orange-400" : "bg-orange-500"
-          }`}
-        >
-          Name
-        </button>
-        <button
-          onClick={() => setSortBy("category")}
-          className={`p-1 m-2 w-28 ${
-            sortBy === "category" ? "bg-orange-400" : "bg-orange-500"
-          }`}
-        >
-          Category
-        </button>
-      </div>
+  useEffect(() => {
+    if (Array.isArray(items)) {
+      const sorted = [...items].sort((a, b) => {
+        if (sortBy === "name") {
+          return a.name.localeCompare(b.name);
+        } else if (sortBy === "category") {
+          return a.category.localeCompare(b.category);
+        }
+        
+      });
+      setSortedItems(sorted);
+    }
+}, [items, sortBy]);
+    
 
+
+return (
+
+  <div>
+      <button onClick={() => setSortBy('name')} className="p-5 m-2 text-xl bg-gray-400 rounded-xl hover:bg-orange-300">
+        Sort by Name</button>
+      <button onClick={() => setSortBy('category')} className="p-5 m-2 text-xl bg-gray-400 rounded-xl  hover:bg-orange-300">
+        Sort by Category</button>
       <ul>
-        {sortedItems.map((item) => (
-          <Item
-            key={item.id}
-            name={item.name}
-            quantity={item.quantity}
-            category={item.category}
-            onSelect={() => onItemSelect(item.name)}
-          />
+        {sortedItems.map(item => (
+          <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category} />
         ))}
       </ul>
     </div>
-  );
+);
 };
 
 export default ItemList;
